@@ -32,10 +32,12 @@ class ViewController: UIViewController, MDWampClientDelegate {
 class FastSession: RiffleSession {
     override func onJoin() {
         
-        subscribe("pd.damouse.quick/sub") { () -> () in
-            print("Sub recieved")
-        }
-        
-        call("pd.damouse.quick/hello", args:"hello!", "you cake")
+        subscribe("pd.damouse.quick/sub", handler: self.containerPub)
+        print("Args we want: ", containerPub)
+//        call("pd.damouse.quick/hello", args:"hello!", "you cake")
+    }
+    
+    func containerPub(args: AnyObject...) {
+        print("Sub recieved: ", args)
     }
 }

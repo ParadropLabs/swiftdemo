@@ -59,25 +59,19 @@ class RiffleSession: NSObject, MDWampClientDelegate {
         
     }
 
-    func testsubscribe(endpoint: String, handler: () -> ()) {
+    func subscribe(endpoint: String, handler: (AnyObject...) -> ()) {
         session.subscribe(endpoint, onEvent: { (event: MDWampEvent!) -> Void in
             print("Sub came in: ", event)
-            handler()
             
-            }) { (err: NSError!) -> Void in
-                if let e = err {
-                    print("An error occured: ", e)
-                }
-                else {
-                    print("Sub completed")
-                }
-        }
-    }
-    
-    func subscribe(endpoint: String, handler: () -> ()) {
-        session.subscribe(endpoint, onEvent: { (event: MDWampEvent!) -> Void in
-            print("Sub came in: ", event)
-            handler()
+//            print("", event.subscription)
+//            print("", event.publication)
+//            print("", event.topic)
+            print("", event.details)
+            print("", event.arguments)
+//            print("", event.argumentsKw)
+//            print("", event.event)
+            
+            handler(event.arguments)
             
         }) { (err: NSError!) -> Void in
             if let e = err {
@@ -100,4 +94,18 @@ class RiffleSession: NSObject, MDWampClientDelegate {
         }
     }
 }
+
+/*
+Getting the signature from provided handler:
+
+func f(a: Int, b: Int) {
+}
+
+let y = Mirror(reflecting: f)
+
+let types = y.subjectType
+print(types)
+
+
+*/
 
