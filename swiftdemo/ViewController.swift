@@ -8,10 +8,6 @@
 
 import UIKit
 
-//let URL = "ws://ubuntu@ec2-52-26-83-61.us-west-2.compute.amazonaws.com:8000/ws"
-let URL = "ws://localhost:8000/ws"
-
-
 class ViewController: UIViewController, MDWampClientDelegate {
     var session: FastSession?
     
@@ -32,12 +28,20 @@ class ViewController: UIViewController, MDWampClientDelegate {
 class FastSession: RiffleSession {
     override func onJoin() {
         
-        subscribe("pd.damouse.quick/sub", handler: self.containerPub)
-        print("Args we want: ", containerPub)
-//        call("pd.damouse.quick/hello", args:"hello!", "you cake")
+        // Sub and Register
+        subscribe("pd.damouse.quick/cpub", callback: clientPub)
+        register("pd.damouse.quick/ccall", callback: clientCall)
+        
+        // Pub and Call
+        call("pd.damouse.quick/scall", args:"hello!", "you cake")
+        publish("pd.damouse.quick/spub", args: [])
     }
     
-    func containerPub(args: AnyObject...) {
+    func clientPub(args: AnyObject...) {
         print("Sub recieved: ", args)
+    }
+    
+    func clientCall(args: AnyObject...) {
+        
     }
 }

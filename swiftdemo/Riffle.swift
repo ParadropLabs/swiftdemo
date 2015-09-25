@@ -55,31 +55,22 @@ class RiffleSession: NSObject, MDWampClientDelegate {
     
     
     //MARK: Messaging Patterns
-    func registerZ(pdid: String, callback: (AnyObject... ) -> ()) {
-        
-    }
-
-    func subscribe(endpoint: String, handler: (AnyObject...) -> ()) {
-        session.subscribe(endpoint, onEvent: { (event: MDWampEvent!) -> Void in
-            print("Sub came in: ", event)
+    func register(endpoint: String, callback: (AnyObject... ) -> ()) {
+        session.registerRPC(endpoint, procedure: { (wamp: MDWamp!, invocation: MDWampInvocation!) -> Void in
+            print("Someone called hello: ", invocation)
             
-//            print("", event.subscription)
-//            print("", event.publication)
-//            print("", event.topic)
-            print("", event.details)
-            print("", event.arguments)
-//            print("", event.argumentsKw)
-//            print("", event.event)
+            //print("", invocation.request)
+            //print("", invocation.registration)
+            //print("", invocation.options)
+            //print("", invocation.arguments)
+            //print("", invocation.argumentsKw)
             
-            handler(event.arguments)
+            callback(invocation.arguments)
             
-        }) { (err: NSError!) -> Void in
-            if let e = err {
-                print("An error occured: ", e)
-            }
-            else {
-                print("Sub completed")
-            }
+            }, cancelHandler: { () -> Void in
+                print("Register Cancelled!")
+            }) { (err: NSError!) -> Void in
+                print("Registration completed.")
         }
     }
     
@@ -91,6 +82,38 @@ class RiffleSession: NSObject, MDWampClientDelegate {
             else {
                 print("Call completed")
             }
+        }
+    }
+    
+    func publish(endpoint: String, args: AnyObject...) {
+        session.publishTo(endpoint, payload: args, result: { (err: NSError!) -> Void in
+            if let e = err {
+                print("Error: ", e)
+            }
+        })
+    }
+    
+    func subscribe(endpoint: String, callback: (AnyObject...) -> ()) {
+        session.subscribe(endpoint, onEvent: { (event: MDWampEvent!) -> Void in
+            print("Sub came in: ", event)
+            
+            //print("", event.subscription)
+            //print("", event.publication)
+            //print("", event.topic)
+            print("", event.details)
+            print("", event.arguments)
+            //print("", event.argumentsKw)
+            //print("", event.event)
+            
+            callback(event.arguments)
+            
+            }) { (err: NSError!) -> Void in
+                if let e = err {
+                    print("An error occured: ", e)
+                }
+                else {
+                    print("Sub completed")
+                }
         }
     }
 }
