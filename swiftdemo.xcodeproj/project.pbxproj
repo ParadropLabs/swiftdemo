@@ -14,6 +14,7 @@
 		501447FD1BB4C56B00DEB9E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 501447FC1BB4C56B00DEB9E4 /* Images.xcassets */; };
 		501448001BB4C56B00DEB9E4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 501447FE1BB4C56B00DEB9E4 /* LaunchScreen.xib */; };
 		5014480C1BB4C56B00DEB9E4 /* swiftdemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5014480B1BB4C56B00DEB9E4 /* swiftdemoTests.swift */; };
+		506F199C1BB51F920041A9D2 /* Riffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F199B1BB51F920041A9D2 /* Riffle.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		5014480A1BB4C56B00DEB9E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5014480B1BB4C56B00DEB9E4 /* swiftdemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftdemoTests.swift; sourceTree = "<group>"; };
 		506F19821BB4EA970041A9D2 /* swiftdemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "swiftdemo-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		506F199B1BB51F920041A9D2 /* Riffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Riffle.swift; sourceTree = "<group>"; };
 		CDA15A5CD13C5223F61FB999 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E222314BA11562B872E0AEC7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				501447F51BB4C56B00DEB9E4 /* AppDelegate.swift */,
+				506F199B1BB51F920041A9D2 /* Riffle.swift */,
 				501447F71BB4C56B00DEB9E4 /* ViewController.swift */,
 				501447F91BB4C56B00DEB9E4 /* Main.storyboard */,
 				501447FC1BB4C56B00DEB9E4 /* Images.xcassets */,
@@ -275,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				501447F81BB4C56B00DEB9E4 /* ViewController.swift in Sources */,
+				506F199C1BB51F920041A9D2 /* Riffle.swift in Sources */,
 				501447F61BB4C56B00DEB9E4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
