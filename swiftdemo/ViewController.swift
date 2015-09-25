@@ -13,34 +13,29 @@ let URL = "ws://localhost:8000/ws"
 
 
 class ViewController: UIViewController, MDWampClientDelegate {
-    var socket: MDWampTransportWebSocket?
-    var session: MDWamp?
+    var session: FastSession?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Attempting to connect...")
         
-        socket = MDWampTransportWebSocket(server:NSURL(string: URL), protocolVersions:[kMDWampProtocolWamp2msgpack, kMDWampProtocolWamp2json])
-        session = MDWamp(transport: socket, realm: "pd.damouse", delegate: self)
+        session = FastSession(pdid: "pd.damouse")
         session?.connect()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    func mdwamp(wamp: MDWamp!, sessionEstablished info: [NSObject : AnyObject]!) {
-        print("Session Established!")
-        
-        session?.call("pd.damouse.quick/hello", payload: "Hello!", complete: { (resutl:MDWampResult!, err:NSError!) -> Void in
-            print("Request completed!")
-        })
-    }
-    
-    func mdwamp(wamp: MDWamp!, closedSession code: Int, reason: String!, details: [NSObject : AnyObject]!) {
-        print("Session Closed!")
-    }
-
 }
 
+
+/////////////////////////////////
+// Local Session
+/////////////////////////////////
+
+class FastSession: RiffleSession {
+    override func onJoin() {
+        
+        subscribe("pd.damouse.quick/sub") { () -> () in
+            print("Sub recieved")
+        }
+        
+        call("pd.damouse.quick/hello", args:"hello!", "you cake")
+    }
+}

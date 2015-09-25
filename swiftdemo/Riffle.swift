@@ -30,23 +30,74 @@ class RiffleSession: NSObject, MDWampClientDelegate {
         session.connect()
     }
     
+    func handle(args: AnyObject...) {
+        
+    }
+    
     //MARK: Delegates
     func mdwamp(wamp: MDWamp!, sessionEstablished info: [NSObject : AnyObject]!) {
         print("Session Established!")
-        
+        onJoin()
     }
     
     func mdwamp(wamp: MDWamp!, closedSession code: Int, reason: String!, details: [NSObject : AnyObject]!) {
         print("Session Closed!")
+        onLeave()
     }
+    
+    func onJoin() {
+        // Called when a session closes. Setup here.
+    }
+    
+    func onLeave() {
+        // called when a session closes. Do any cleanup here
+    }
+    
     
     //MARK: Messaging Patterns
-    func register(pdid: String, callback: (AnyObject... ) -> ()) {
+    func registerZ(pdid: String, callback: (AnyObject... ) -> ()) {
         
     }
+
+    func testsubscribe(endpoint: String, handler: () -> ()) {
+        session.subscribe(endpoint, onEvent: { (event: MDWampEvent!) -> Void in
+            print("Sub came in: ", event)
+            handler()
+            
+            }) { (err: NSError!) -> Void in
+                if let e = err {
+                    print("An error occured: ", e)
+                }
+                else {
+                    print("Sub completed")
+                }
+        }
+    }
     
-    func call() {
-        
+    func subscribe(endpoint: String, handler: () -> ()) {
+        session.subscribe(endpoint, onEvent: { (event: MDWampEvent!) -> Void in
+            print("Sub came in: ", event)
+            handler()
+            
+        }) { (err: NSError!) -> Void in
+            if let e = err {
+                print("An error occured: ", e)
+            }
+            else {
+                print("Sub completed")
+            }
+        }
+    }
+    
+    func call(endpoint: String, args: AnyObject...) {
+        session.call(endpoint, payload: args) { (result: MDWampResult!, err: NSError!) -> Void in
+            if err != nil {
+                print("ERR: ", err)
+            }
+            else {
+                print("Call completed")
+            }
+        }
     }
 }
 
