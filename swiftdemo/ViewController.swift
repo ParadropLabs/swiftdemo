@@ -11,8 +11,8 @@ import UIKit
 class ViewController: UIViewController, MDWampClientDelegate {
     var session: FastSession?
     
-//    @IBOutlet weak var textfieldInput: UITextView!
-//    @IBOutlet weak var textfieldMessages: UITextView!
+    @IBOutlet weak var textfieldInput: UITextView!
+    @IBOutlet weak var textfieldMessages: UITextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,14 +21,14 @@ class ViewController: UIViewController, MDWampClientDelegate {
 //        session?.connect()
     }
     
-//    @IBAction func send(sender: AnyObject) {
-//        let message = textfieldInput.text
-//        
-//        textfieldMessages.text = textfieldMessages.text + message + "\n"
-//        
-//        textfieldInput.resignFirstResponder()
-//        textfieldInput.text = ""
-//    }
+    @IBAction func sendMessage(sender: AnyObject) {
+        let message = textfieldInput.text
+        
+        textfieldMessages.text = textfieldMessages.text + message + "\n"
+        
+        textfieldInput.resignFirstResponder()
+        textfieldInput.text = ""
+    }
 }
 
 
