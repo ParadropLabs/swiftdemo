@@ -8,13 +8,23 @@
 
 import Foundation
 
-//let NODE = "ws://ubuntu@ec2-52-26-83-61.us-west-2.compute.amazonaws.com:8000/ws"
-let NODE = "ws://localhost:8000/ws"
+let NODE = "ws://ubuntu@ec2-52-26-83-61.us-west-2.compute.amazonaws.com:8000/ws"
+//let NODE = "ws://localhost:8000/ws"
 
 
-class RiffleSession: NSObject, MDWampClientDelegate {
+// Sets itself as the delegate if none provided
+@objc protocol RiffleDelegate {
+    func onJoin()
+    func onLeave()
+}
+
+
+class RiffleSession: NSObject, MDWampClientDelegate, RiffleDelegate {
     var socket: MDWampTransportWebSocket
     var session: MDWamp
+    
+    var delegate: RiffleDelegate?
+    
     
     init(pdid: String) {
         socket = MDWampTransportWebSocket(server:NSURL(string: NODE), protocolVersions:[kMDWampProtocolWamp2msgpack, kMDWampProtocolWamp2json])
@@ -27,6 +37,10 @@ class RiffleSession: NSObject, MDWampClientDelegate {
     }
     
     func connect() {
+        if delegate == nil {
+            delegate = self
+        }
+        
         session.connect()
     }
     
@@ -37,12 +51,12 @@ class RiffleSession: NSObject, MDWampClientDelegate {
     //MARK: Delegates
     func mdwamp(wamp: MDWamp!, sessionEstablished info: [NSObject : AnyObject]!) {
         print("Session Established!")
-        onJoin()
+        delegate!.onJoin()
     }
     
     func mdwamp(wamp: MDWamp!, closedSession code: Int, reason: String!, details: [NSObject : AnyObject]!) {
         print("Session Closed!")
-        onLeave()
+        delegate!.onLeave()
     }
     
     func onJoin() {
