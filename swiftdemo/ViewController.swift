@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Riffle
 
 class ViewController: UIViewController, RiffleDelegate {
     //var session: FastSession?

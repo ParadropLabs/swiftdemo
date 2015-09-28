@@ -9,6 +9,6 @@
 #ifndef swiftdemo_Bridging_Header_h
 #define swiftdemo_Bridging_Header_h
 
-#import "MDWamp.h"
+
 
 #endif /* swiftdemo_Bridging_Header_h */
