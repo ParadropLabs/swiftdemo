@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>12F882F7-E6F3-40CC-B551-E0309891DE4D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>swiftdemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5D3ADDE5F42E507E9DBBAC8613A105065C1C6087</key>
+		<string>github.com:ParadropLabs/swiftdemo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>swiftdemo.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5D3ADDE5F42E507E9DBBAC8613A105065C1C6087</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:ParadropLabs/swiftdemo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5D3ADDE5F42E507E9DBBAC8613A105065C1C6087</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5D3ADDE5F42E507E9DBBAC8613A105065C1C6087</string>
+			<key>IDESourceControlWCCName</key>
+			<string>swiftdemo</string>
+		</dict>
+	</array>
+</dict>
+</plist>

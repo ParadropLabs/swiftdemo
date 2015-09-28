@@ -43,6 +43,7 @@ class ViewController: UIViewController, RiffleDelegate {
         print("Sent Message")
     }
     
+    
     func newMessage(contents: AnyObject...) {
         let a = contents[0] as! NSArray
         let b = a[0] as! NSArray

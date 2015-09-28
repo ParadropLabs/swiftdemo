@@ -14,7 +14,7 @@
 		501447FD1BB4C56B00DEB9E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 501447FC1BB4C56B00DEB9E4 /* Images.xcassets */; };
 		501448001BB4C56B00DEB9E4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 501447FE1BB4C56B00DEB9E4 /* LaunchScreen.xib */; };
 		5014480C1BB4C56B00DEB9E4 /* swiftdemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5014480B1BB4C56B00DEB9E4 /* swiftdemoTests.swift */; };
-		50F2260E1BB8CE3500ECFF76 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F2260D1BB8CE3500ECFF76 /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		50F2260E1BB8CE3500ECFF76 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F2260D1BB8CE3500ECFF76 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +39,7 @@
 		501448051BB4C56B00DEB9E4 /* swiftdemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftdemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5014480A1BB4C56B00DEB9E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5014480B1BB4C56B00DEB9E4 /* swiftdemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftdemoTests.swift; sourceTree = "<group>"; };
+		501448161BB9BFCB00DEB9E4 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = ../../MyPlayground.playground; sourceTree = "<group>"; };
 		506F19821BB4EA970041A9D2 /* swiftdemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "swiftdemo-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		50F2260D1BB8CE3500ECFF76 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BF9B9219CDF2622F7F29C460 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +99,7 @@
 				501447F51BB4C56B00DEB9E4 /* AppDelegate.swift */,
 				501447F71BB4C56B00DEB9E4 /* ViewController.swift */,
 				50F2260D1BB8CE3500ECFF76 /* LoginViewController.swift */,
+				501448161BB9BFCB00DEB9E4 /* MyPlayground.playground */,
 				501447F91BB4C56B00DEB9E4 /* Main.storyboard */,
 				501447FC1BB4C56B00DEB9E4 /* Images.xcassets */,
 				501447FE1BB4C56B00DEB9E4 /* LaunchScreen.xib */,
@@ -427,6 +429,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = swiftdemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ironether.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -440,6 +443,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = swiftdemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ironether.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
