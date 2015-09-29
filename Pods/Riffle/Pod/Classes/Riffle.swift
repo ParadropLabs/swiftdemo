@@ -68,7 +68,41 @@ public class RiffleSession: NSObject, MDWampClientDelegate, RiffleDelegate {
     }
     
     
-    //MARK: Messaging Patterns
+    //MARK: Messaging Patterns with a dash of Cumin
+    public func subscribe<A, B>(pdid: String, _ fn: (A, B) -> ())  {
+        _subscribe(pdid, fn: cumin(fn))
+    }
+    
+    
+    // Testing a sample call
+    func _subscribe(endpoint: String, fn: ([AnyObject]) -> ()) {
+        // This is the real subscrive method
+        session.subscribe(endpoint, onEvent: { (event: MDWampEvent!) -> Void in
+            print("Sub came in: ", event)
+            
+            //print("", event.subscription)
+            //print("", event.publication)
+            //print("", event.topic)
+            print("", event.details)
+            print("", event.arguments)
+            //print("", event.argumentsKw)
+            //print("", event.event)
+            
+            //fn(self.extractArgs(event.arguments))
+            fn(event.arguments[0] as! [AnyObject])
+            
+            }) { (err: NSError!) -> Void in
+                if let e = err {
+                    print("An error occured: ", e)
+                }
+                else {
+                    print("Sub completed")
+                }
+        }
+    }
+
+
+    //MARK: OLD CODE
     public func register(endpoint: String, callback: (AnyObject... ) -> ()) {
         session.registerRPC(endpoint, procedure: { (wamp: MDWamp!, invocation: MDWampInvocation!) -> Void in
             print("Someone called hello: ", invocation)
@@ -100,49 +134,102 @@ public class RiffleSession: NSObject, MDWampClientDelegate, RiffleDelegate {
     }
     
     public func publish(endpoint: String, args: AnyObject...) {
-        session.publishTo(endpoint, payload: args, result: { (err: NSError!) -> Void in
+        session.publishTo(endpoint, args: args, kw: [:], options: [:]) { (err: NSError!) -> Void in
             if let e = err {
                 print("Error: ", e)
             }
-        })
-    }
-    
-    public func subscribe(endpoint: String, callback: (AnyObject...) -> ()) {
-        session.subscribe(endpoint, onEvent: { (event: MDWampEvent!) -> Void in
-            print("Sub came in: ", event)
-            
-            //print("", event.subscription)
-            //print("", event.publication)
-            //print("", event.topic)
-            print("", event.details)
-            print("", event.arguments)
-            //print("", event.argumentsKw)
-            //print("", event.event)
-            
-            callback(event.arguments)
-            
-            }) { (err: NSError!) -> Void in
-                if let e = err {
-                    print("An error occured: ", e)
-                }
-                else {
-                    print("Sub completed")
-                }
         }
     }
+    
+//    public func subscribe(endpoint: String, callback: (AnyObject...) -> ()) {
+//        session.subscribe(endpoint, onEvent: { (event: MDWampEvent!) -> Void in
+//            print("Sub came in: ", event)
+//            
+//            //print("", event.subscription)
+//            //print("", event.publication)
+//            //print("", event.topic)
+//            print("", event.details)
+//            print("", event.arguments)
+//            //print("", event.argumentsKw)
+//            //print("", event.event)
+//            
+//            callback(event.arguments)
+//            
+//            }) { (err: NSError!) -> Void in
+//                if let e = err {
+//                    print("An error occured: ", e)
+//                }
+//                else {
+//                    print("Sub completed")
+//                }
+//        }
+//    }
+    
+    
+    //MARK: Utility
+    func extractArgs(args: [AnyObject]) -> [AnyObject] {
+        // Extracts the arguments and attempts to cast them based on their appearance
+        return args[0] as! [AnyObject]
+//        let a = args[0] as! NSArray
+//        let b = a[0] as! NSArray
+//        return b as [AnyObject]
+    }
 }
+
+
+////////////////////
+// Cumin
+////////////////////
 
 /*
-Getting the signature from provided handler:
+ Cumin allows for type-safe deferred method evaluation
+ through currying. Not sure how to make it play without variadic generics, though there might be a way
 
-func f(a: Int, b: Int) {
-}
-
-let y = Mirror(reflecting: f)
-
-let types = y.subjectType
-print(types)
-
-
+TODO: 
+    throw a well known error on miscast
+    throw a well known error if args size doesn't match
+    hold method weakly, dont call if deallocd
 */
 
+/////////////////
+// *None
+/////////////////
+
+// NoneNone
+func cumin(fn: () -> ()) -> ([AnyObject]) -> () {
+    return { (args: [AnyObject]) in fn() }
+}
+
+// OneNone
+func cumin<A>(fn: A -> ()) -> ([AnyObject]) -> () {
+    return { (args: [AnyObject]) in fn(args[0] as! A) }
+}
+
+
+// TwoNone
+func cumin<A, B>(fn: (A, B) -> ()) -> ([AnyObject]) -> () {
+    return { (args: [AnyObject]) -> () in fn(args[0] as! A, args[1] as! B) }
+}
+
+// ThreeNone
+func cumin<A, B, C>(fn: (A, B, C) -> ()) -> ([AnyObject]) -> () {
+    return { (args: [AnyObject]) -> () in fn(args[0] as! A, args[2] as! B, args[3] as! C) }
+}
+
+/////////////////
+// *One
+/////////////////
+// OneOne
+func cumin<A, R>(fn: A -> R) -> ([AnyObject]) -> R {
+    return { (args: [AnyObject]) -> R in fn(args[0] as! A) }
+}
+
+// TwoOne
+func cumin<A, B, R>(fn: (A, B) -> R) -> ([AnyObject]) -> R {
+    return { (args: [AnyObject]) -> R in fn(args[0] as! A, args[1] as! B) }
+}
+
+// ThreeOne
+func cumin<A, B, C, R>(fn: (A, B, C) -> R) -> ([AnyObject]) -> R {
+    return { (args: [AnyObject]) -> R in fn(args[0] as! A, args[1] as! B, args[2] as! C) }
+}

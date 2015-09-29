@@ -44,18 +44,12 @@ class ViewController: UIViewController, RiffleDelegate {
     }
     
     
-    func newMessage(contents: AnyObject...) {
-        let a = contents[0] as! NSArray
-        let b = a[0] as! NSArray
-        
-        let sender = b.objectAtIndex(0) as! String
-        let message = b.objectAtIndex(1) as! String
-        
+    func newMessage(sender: String, message: String) {
         textfieldMessages.text = sender + ": " + message + "\n\n" + textfieldMessages.text
     }
     
     func onJoin() {
-        session!.subscribe("pd.damouse.rschat/message", callback: newMessage)
+        session!.subscribe("pd.damouse.rschat/message", newMessage)
         print("Finished subscribing")
     }
     
@@ -69,23 +63,23 @@ class ViewController: UIViewController, RiffleDelegate {
 // Local Session
 /////////////////////////////////
 
-class FastSession: RiffleSession {
-    override func onJoin() {
-        
-        // Sub and Register
-        subscribe("pd.damouse.quick/cpub", callback: clientPub)
-        register("pd.damouse.quick/ccall", callback: clientCall)
-        
-        // Pub and Call
-        call("pd.damouse.quick/scall", args:"hello!", "you cake")
-        publish("pd.damouse.quick/spub", args: [])
-    }
-    
-    func clientPub(args: AnyObject...) {
-        print("Sub recieved: ", args)
-    }
-    
-    func clientCall(args: AnyObject...) {
-        
-    }
-}
+//class FastSession: RiffleSession {
+//    override func onJoin() {
+//        
+//        // Sub and Register
+//        subscribe("pd.damouse.quick/cpub", callback: clientPub)
+//        register("pd.damouse.quick/ccall", callback: clientCall)
+//        
+//        // Pub and Call
+//        call("pd.damouse.quick/scall", args:"hello!", "you cake")
+//        publish("pd.damouse.quick/spub", args: [])
+//    }
+//    
+//    func clientPub(args: AnyObject...) {
+//        print("Sub recieved: ", args)
+//    }
+//    
+//    func clientCall(args: AnyObject...) {
+//        
+//    }
+//}
